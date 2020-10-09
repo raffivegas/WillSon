@@ -12,7 +12,7 @@ public interface IIOHelper {
 	
 	List<NumberPair> validList();
 	
-	void findValidPairs(List<NumberPair> myList);
+	//void findValidPairs(List<NumberPair> myList);
 	
 	void sendPackage();
 	

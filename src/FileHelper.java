@@ -103,12 +103,6 @@ public class FileHelper implements IIOHelper {
 	}
 
 	@Override
-	public void findValidPairs(List<NumberPair> myList) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public void sendPackage() {
 		// TODO Auto-generated method stub
 		
