@@ -82,7 +82,7 @@ public class FileHelper implements IIOHelper {
 				}
 				System.out.println("Another line");
 				for (NumberPair test : list) {
-					System.out.println(test.left + "," + test.right);
+					System.out.println(test.getLeft() + "," + test.getRight());
 				}
 
 			}

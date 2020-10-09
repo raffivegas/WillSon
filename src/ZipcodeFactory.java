@@ -26,7 +26,7 @@ public class ZipcodeFactory implements ICruncher {
 		boolean repeat = true;
 		boolean reachedMax = false;
 		do {
-			if (Integer.parseInt(myList.get(counter).left) > Integer.parseInt(myList.get(counter + 1).left)) {
+			if (Integer.parseInt(myList.get(counter).getLeft()) > Integer.parseInt(myList.get(counter + 1).getLeft())) {
 				sortedList.clear();
 				sortedList.addAll(myList);
 				NumberPair whyIsThisHappeningToMe = myList.get(counter);
@@ -51,7 +51,7 @@ public class ZipcodeFactory implements ICruncher {
 		} while (repeat);
 
 		for (NumberPair raf : myList) {
-			System.out.println(raf.left + "," + raf.right);
+			System.out.println(raf.getLeft() + "," + raf.getRight());
 		}
 		
 		//repeat = 
@@ -69,29 +69,40 @@ public class ZipcodeFactory implements ICruncher {
 			finalList.clear();
 			finalList.addAll(mySortedList);
 */
-			while (counter < mySortedList.size()) {
+		//do {
+			while (counter < mySortedList.size() - 1) {
 				finalList.clear();
 				finalList.addAll(mySortedList);
-				int leftCurrent = Integer.parseInt(mySortedList.get(counter).left);
-				int rightCurrent = Integer.parseInt(mySortedList.get(counter).right);
-				int nextLeft = Integer.parseInt(mySortedList.get(counter + 1).left);
-				int nextRight = Integer.parseInt(mySortedList.get(counter + 1).right);
+				int leftCurrent = Integer.parseInt(mySortedList.get(counter).getLeft());
+				int rightCurrent = Integer.parseInt(mySortedList.get(counter).getRight());
+				int nextLeft = Integer.parseInt(mySortedList.get(counter + 1).getLeft());
+				int nextRight = Integer.parseInt(mySortedList.get(counter + 1).getRight());
 
+				NumberPair newPair = new NumberPair(String.valueOf(leftCurrent), String.valueOf(nextRight));
 				if (rightCurrent >= nextLeft) {
-					NumberPair newPair = new NumberPair(String.valueOf(leftCurrent), String.valueOf(nextRight));
+					//NumberPair newPair = new NumberPair();
+					if (nextRight < rightCurrent) {
+						newPair.setRight(String.valueOf(rightCurrent));
+					}
+					
 					finalList.remove(counter);
 					finalList.remove(counter);
 					finalList.add(newPair);
 					finalList = sortPairs(finalList);
-					mySortedList = finalList;
-					counter++;
+					mySortedList.clear();
+					mySortedList.addAll(finalList);
+					counter--;
 				}
+				counter++;
 			}
+		//}while (maxCounter < mySortedList.size());
 
 		//}
 
+		
+		System.out.println("Final List");
 		for (NumberPair raf : finalList) {
-			System.out.println(raf.left + "," + raf.right);
+			System.out.println(raf.getLeft() + "," + raf.getRight());
 		}
 
 		return mySortedList;
