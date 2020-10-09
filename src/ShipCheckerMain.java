@@ -1,3 +1,6 @@
+import interfaces.IIOHelper;
+import interfaces.ICruncher;
+
 /**
  * 
  */
@@ -15,8 +18,12 @@ public class ShipCheckerMain {
 		// TODO Auto-generated method stub
 		System.out.println("test");
 		
-		FileFormatChecker myChecker = new FileFormatChecker();
-		myChecker.parsePackage();
+		IIOHelper myChecker = new FileHelper();
+		ICruncher myOutput = new ZipcodeFactory();
+		
+		myOutput.findValidPairs(myChecker.parsePackage());
+		
+		
 
 	}
 
