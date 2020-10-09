@@ -50,15 +50,16 @@ public class ZipcodeFactory implements ICruncher {
 			}
 		} while (repeat);
 
-		for (NumberPair raf : myList) {
-			System.out.println(raf.getLeft() + "," + raf.getRight());
-		}
+		/*
+		 * for (NumberPair raf : myList) { System.out.println(raf.getLeft() + "," +
+		 * raf.getRight()); }
+		 */
 		
 		//repeat = 
 		return myList;
 	}
 
-	public List<NumberPair> findValidPairs(List<NumberPair> mySortedList) {
+	public List<NumberPair> findFinalPairs(List<NumberPair> mySortedList) {
 
 		List<NumberPair> finalList = new ArrayList<NumberPair>();
 
@@ -100,10 +101,11 @@ public class ZipcodeFactory implements ICruncher {
 		//}
 
 		
-		System.out.println("Final List");
-		for (NumberPair raf : finalList) {
-			System.out.println(raf.getLeft() + "," + raf.getRight());
-		}
+		/*
+		 * System.out.println("Can't ship to Zipcodes within the following ranges:");
+		 * for (NumberPair raf : finalList) { System.out.println(raf.getLeft() + "," +
+		 * raf.getRight()); }
+		 */
 
 		return mySortedList;
 	}

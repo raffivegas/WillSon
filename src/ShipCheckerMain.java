@@ -24,10 +24,10 @@ public class ShipCheckerMain {
 		System.out.println("test");
 		List<NumberPair> finalList = new ArrayList<NumberPair>();
 		
-		IIOHelper myChecker = new FileHelper();
+		IIOHelper myHelper = new FileHelper();
 		ICruncher myOutput = new ZipcodeFactory();
 		
-		finalList = myOutput.findValidPairs(myOutput.sortPairs(myChecker.parsePackage()));
+		myHelper.sendPackage(myOutput.findFinalPairs(myOutput.sortPairs(myHelper.parsePackage())));
 		/*
 		 * finalList = myOutput.sortPairs(finalList); finalList =
 		 * myOutput.findValidPairs(finalList);
