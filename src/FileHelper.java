@@ -11,13 +11,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner; // Import the Scanner class to read text files
 
+import javax.swing.JOptionPane;
+
 public class FileHelper implements IIOHelper {
 
 	/**
 	 * @author Raffi
-	 * This method receives and parses a range of zip codes from a file.
+	 * This method receives (via FileInputStream) and parses a range of zip codes from a file.
 	 * It does not sort them other than the order received.  The method is an interface method
-	 * in the event the input vehicle changes, i.e. receiving the input from an API/XML.
+	 * in the event the input vehicle changes, i.e. receiving the input from an API/XML.  It
+	 * can likely be decoupled further by creating separate methods for capturing and parsing the input.
 	 */
 	@Override
 	public List<NumberPair> parsePackage() {
@@ -108,19 +111,42 @@ public class FileHelper implements IIOHelper {
 		return list;
 	}
 
+	/**
+	 * @author Raffi
+	 * This method validates the input stream.  Should give a useful notification to the user
+	 * of what is wrong in the event validation fails.  Interface makes it so we can have
+	 * validation for different type of input streams, like for example if this were receiving
+	 * a REST message (XML, JSON, etc.)
+	 */
 	@Override
-	public List<NumberPair> validateInput() {
-		// TODO Auto-generated method stub
-		return null;
+	public void validateInput() {
+		// TODO write code to validate the input, checking things like:
+		// 5 digits for zipcodes, the left right pairs should have the lesser number on
+		// the left and the greater number on the right, verify numbers only (no special
+		// chars or letters), if the file is empty, etc.  Output a message to the screen notifying the user
+		// what was invalid in the input file.  For the sake of time, I'm doing a catch all
+		// with some general instructions on how to format the file.
+
 	}
 
+	/**
+	 * @author Raffi
+	 * This method outputs or "ships" the results.  If this were an API, this might handle formatting
+	 * or serializing of the package to send to a destination.
+	 */
 	@Override
 	public void sendPackage(List<NumberPair> finalList) {
 		// TODO Auto-generated method stub
+		String myOutputString = "Can't ship to Zipcodes within the following ranges:\n";
+		
 		System.out.println("Can't ship to Zipcodes within the following ranges:");
 		for (NumberPair raf : finalList) {
-			System.out.println(raf.getLeft() + "," + raf.getRight());
+			System.out.println(raf.getLeft() + ", " + raf.getRight());
+			myOutputString += raf.getLeft() + ", " + raf.getRight() + "\n";
 		}
+		
+		JOptionPane.showMessageDialog(null, myOutputString, "InfoBox: " + "testRaf", JOptionPane.INFORMATION_MESSAGE);
+	    
 		
 	}
 

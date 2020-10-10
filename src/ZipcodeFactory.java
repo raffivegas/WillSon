@@ -16,7 +16,15 @@ public class ZipcodeFactory implements ICruncher {
 	 * the algo looks at a pair and compares it to every other pair in the stack until it reaches the end 
 	 * or finds a number greater than it (comparing only the left numbers), then it either has reached the end
 	 * and starts over comparing from the beginning one pair vs the one next to it, or if there are still pairs after it
-	 * it grabs the next pair immediately after it and starts to move that down the list.  Here's the pattern of this input:
+	 * it grabs the next pair immediately after it and starts to move that down the list.
+	 * Here's the pattern as the code orders 5,2,3,7,1,0 (I made the example single rows for simplicity, my algo does pairs):
+	 * start -----------------------------------> end
+	 * 5	2	2	2	2	2	2	2	2	1	1	0
+	 * 2	5	3	3	3	3	3	1	1	2	0	1
+	 * 3	3	5	5	5	1	1	3	0	0	2	2
+	 * 7	7	7	1	1	5	0	0	3	3	3	3
+	 * 1	1	1	7	0	0	5	5	5	5	5	5
+	 * 0	0	0	0	7	7	7	7	7	7	7	7
 	 * Ultimately, it just works.
 	 */
 	@Override
@@ -57,11 +65,6 @@ public class ZipcodeFactory implements ICruncher {
 				repeat = true;
 				// resetting the max counter because we had a leftCurrent > nextLeft encounter.
 				maxCounter = 0;
-				System.out.println("break");
-				 for (NumberPair raf : myList) {
-					 System.out.println("*" + raf.getLeft() + "," + raf.getRight()); 
-					 }
-				 System.out.println("bob");
 				
 			} else if (reachedMax == true) {  // have we iterated over the whole stack?  If so, we're done.
 				repeat = false;
@@ -81,14 +84,6 @@ public class ZipcodeFactory implements ICruncher {
 			}
 		} while (repeat);  // keep going while repeat is true.
 
-		
-		/*
-		 * for (NumberPair raf : myList) { System.out.println("*" + raf.getLeft() + ","
-		 * + raf.getRight()); }
-		 */
-		 
-		
-		//repeat = 
 		return myList;
 	}
 
@@ -97,13 +92,7 @@ public class ZipcodeFactory implements ICruncher {
 		List<NumberPair> finalList = new ArrayList<NumberPair>();
 
 		int counter = 0;
-		int maxCounter = 0;
-/*
-		while (maxCounter < mySortedList.size()) {
-			finalList.clear();
-			finalList.addAll(mySortedList);
-*/
-		//do {
+
 			while (counter < mySortedList.size() - 1) {
 				finalList.clear();
 				finalList.addAll(mySortedList);
@@ -114,7 +103,6 @@ public class ZipcodeFactory implements ICruncher {
 
 				NumberPair newPair = new NumberPair(String.valueOf(leftCurrent), String.valueOf(nextRight));
 				if (rightCurrent >= nextLeft) {
-					//NumberPair newPair = new NumberPair();
 					if (nextRight < rightCurrent) {
 						newPair.setRight(String.valueOf(rightCurrent));
 					}
@@ -129,16 +117,6 @@ public class ZipcodeFactory implements ICruncher {
 				}
 				counter++;
 			}
-		//}while (maxCounter < mySortedList.size());
-
-		//}
-
-		
-		/*
-		 * System.out.println("Can't ship to Zipcodes within the following ranges:");
-		 * for (NumberPair raf : finalList) { System.out.println(raf.getLeft() + "," +
-		 * raf.getRight()); }
-		 */
 
 		return mySortedList;
 	}

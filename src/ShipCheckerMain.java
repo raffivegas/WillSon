@@ -21,17 +21,13 @@ public class ShipCheckerMain {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		System.out.println("test");
+
 		List<NumberPair> finalList = new ArrayList<NumberPair>();
 		
 		IIOHelper myHelper = new FileHelper();
 		ICruncher myOutput = new ZipcodeFactory();
 		
 		myHelper.sendPackage(myOutput.findFinalPairs(myOutput.sortPairs(myHelper.parsePackage())));
-		/*
-		 * finalList = myOutput.sortPairs(finalList); finalList =
-		 * myOutput.findValidPairs(finalList);
-		 */
 		
 
 	}
