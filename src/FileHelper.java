@@ -13,13 +13,19 @@ import java.util.Scanner; // Import the Scanner class to read text files
 
 public class FileHelper implements IIOHelper {
 
+	/**
+	 * @author Raffi
+	 * This method receives and parses a range of zip codes from a file.
+	 * It does not sort them other than the order received.  The method is an interface method
+	 * in the event the input vehicle changes, i.e. receiving the input from an API/XML.
+	 */
 	@Override
 	public List<NumberPair> parsePackage() {
 
 		List<NumberPair> list = new ArrayList<NumberPair>();
 
-		// disclaimer - I copied the few lines of code (how to read a file/stream it in) off the net.
-		// I wrote the bracket and comma algo myself.
+		// disclaimer - I copied a few lines of code (how to read a file/stream it in) off the net.
+		// I wrote the bracket and comma parsing algo myself.
 
 		try {
 			// TODO add config file with location.
@@ -72,7 +78,7 @@ public class FileHelper implements IIOHelper {
 					}
 					if (grabRight == true) {
 						if (line.charAt(i) != ']') {
-							// we're not at the end of the range set, concatenate the right number.
+							// we're not at the end of the pair, concatenate the right number.
 							right = right + line.charAt(i);
 						} else {
 							// we've reached the end of a pair of numbers, add the number pair to our list.
