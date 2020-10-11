@@ -1,4 +1,5 @@
 import interfaces.IIOHelper;
+import utils.ConfigReader;
 import utils.NumberPair;
 
 import java.io.BufferedReader;
@@ -9,10 +10,16 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 import java.util.Scanner; // Import the Scanner class to read text files
 
 import javax.swing.JOptionPane;
+//TODO add an exception handler formatter/logger class to be able to do something meaningful with exceptions.
 
+/**
+ * @author Raffi
+ * Class to manipulate a file.
+ */
 public class FileHelper implements IIOHelper {
 
 	/**
@@ -29,11 +36,11 @@ public class FileHelper implements IIOHelper {
 
 		// disclaimer - I copied a few lines of code (how to read a file/stream it in) off the net.
 		// I wrote the bracket and comma parsing algo myself.
-
 		try {
 			// TODO add config file with location.
 			BufferedReader br = new BufferedReader(new InputStreamReader(
-					new FileInputStream("C:\\Users\\Raffi\\Desktop\\ZipChecker\\zipcodes.txt"), "UTF8"));
+					//new FileInputStream("C:\\Users\\Raffi\\Desktop\\ZipChecker\\zipcodes.txt"), "UTF8"));
+					new FileInputStream(ConfigReader.getMyProperties().getProperty("filePath")), "UTF8"));
 
 			String line = "";
 			String left = "";
@@ -94,11 +101,8 @@ public class FileHelper implements IIOHelper {
 							left = "";
 							right = "";
 						}
-
 					}
-
 				}
-
 			}
 			// reset var
 			line = "";
@@ -131,23 +135,29 @@ public class FileHelper implements IIOHelper {
 
 	/**
 	 * @author Raffi
-	 * This method outputs or "ships" the results.  If this were an API, this might handle formatting
-	 * or serializing of the package to send to a destination.
+	 * This method outputs or "ships" the results.  If this was using a REST API to send,
+	 * it might handle formatting or serializing of the package to send to an endpoint.
 	 */
 	@Override
 	public void sendPackage(List<NumberPair> finalList) {
-		// TODO Auto-generated method stub
+		
 		String myOutputString = "Can't ship to Zipcodes within the following ranges:\n";
 		
+		try {
 		System.out.println("Can't ship to Zipcodes within the following ranges:");
+		// add final sorted pairs to the string
 		for (NumberPair raf : finalList) {
 			System.out.println(raf.getLeft() + ", " + raf.getRight());
 			myOutputString += raf.getLeft() + ", " + raf.getRight() + "\n";
 		}
 		
+		// output the results to the user.  Will need to add JTextArea embedded in a JScrollPane if the messages
+		// get too long.
 		JOptionPane.showMessageDialog(null, myOutputString, "InfoBox: " + "testRaf", JOptionPane.INFORMATION_MESSAGE);
-	    
-		
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+	    	
 	}
 
 }

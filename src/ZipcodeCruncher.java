@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -5,19 +6,25 @@ import java.util.List;
 import interfaces.ICruncher;
 import interfaces.IIOHelper;
 import utils.NumberPair;
+//TODO add an exception handler class to be able to do something meaningfull with exceptions.
 
-public class ZipcodeFactory implements ICruncher {
+/**
+ * @author Raffi
+ * Class which handles business logic.  In this case, manipulates pairs of zip-codes.
+ */
+public class ZipcodeCruncher implements ICruncher {
+	
+	public ZipcodeCruncher() {
+		
+	}
+	
 	/**
 	 * @author Raffi
-	 * this method sorts a List of NumberPair objects using the left hand value, only in ascending order.
-	 * I just wanted to brute force this algo in an effort to save time. 
-	 * I scribbled a quick pseudo-code algo on paper, then I kludged the code together, or in other words,
-	 * threw stuff at the wall until something stuck, and it came together this way.  In a nutshell,
-	 * the algo looks at a pair and compares it to every other pair in the stack until it reaches the end 
-	 * or finds a number greater than it (comparing only the left numbers), then it either has reached the end
-	 * and starts over comparing from the beginning one pair vs the one next to it, or if there are still pairs after it
-	 * it grabs the next pair immediately after it and starts to move that down the list.
-	 * Here's the pattern as the code orders 5,2,3,7,1,0 (I made the example single rows for simplicity, my algo does pairs):
+	 * bubble sorter - there may have been a recursive way to write this, or the option
+	 * to use an insertion sort instead, but I chose this since it came to mind first.
+	 * Also, might want to consider using a Factory pattern.
+	 * Here's the pattern as the code orders 5,2,3,7,1,0 (columns get sorted)
+	 * (I made this example with single rows for simplicity, my algo does pairs):
 	 * start -----------------------------------> end
 	 * 5	2	2	2	2	2	2	2	2	1	1	0
 	 * 2	5	3	3	3	3	3	1	1	2	0	1
@@ -25,7 +32,6 @@ public class ZipcodeFactory implements ICruncher {
 	 * 7	7	7	1	1	5	0	0	3	3	3	3
 	 * 1	1	1	7	0	0	5	5	5	5	5	5
 	 * 0	0	0	0	7	7	7	7	7	7	7	7
-	 * Ultimately, it just works.
 	 */
 	@Override
 	public List<NumberPair> sortPairs(List<NumberPair> myList) {
@@ -37,12 +43,12 @@ public class ZipcodeFactory implements ICruncher {
 		boolean repeat = true;
 		boolean reachedMax = false;
 		
+		try {
+			
 		if (myList.size() > 1)
 		do {
 			int leftCurrent = Integer.parseInt(myList.get(counter).getLeft());
-			int rightCurrent = Integer.parseInt(myList.get(counter).getRight());
 			int nextLeft = Integer.parseInt(myList.get(counter + 1).getLeft());
-			int nextRight = Integer.parseInt(myList.get(counter + 1).getRight());
 			
 			// if the left side number in the current pair is greater than the pair following it
 			if (leftCurrent > nextLeft) {
@@ -83,33 +89,63 @@ public class ZipcodeFactory implements ICruncher {
 				counter = 0;
 			}
 		} while (repeat);  // keep going while repeat is true.
-
+		
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 		return myList;
 	}
-
+	
+	
+	/**
+	 * @author Raffi
+	 * This method returns the final set of zip-codes which can't be shipped to.
+	 * The final arrangement provides ranges which do not overlap and the minimum 
+	 * number of ranges required to represent the same restrictions as the input.
+	 */
 	public List<NumberPair> findFinalPairs(List<NumberPair> mySortedList) {
 
+		// placeholder for final sorted list which will have the minimum
+		// number of pairs to show which zip-codes can't be shipped to.
 		List<NumberPair> finalList = new ArrayList<NumberPair>();
 
 		int counter = 0;
 
+		try {
 			while (counter < mySortedList.size() - 1) {
+				// initialize and fill the final sorted list.
 				finalList.clear();
 				finalList.addAll(mySortedList);
+				
+				// get the current and next left,right pairs.
 				int leftCurrent = Integer.parseInt(mySortedList.get(counter).getLeft());
 				int rightCurrent = Integer.parseInt(mySortedList.get(counter).getRight());
 				int nextLeft = Integer.parseInt(mySortedList.get(counter + 1).getLeft());
 				int nextRight = Integer.parseInt(mySortedList.get(counter + 1).getRight());
 
+				// doing this backwards.  Creates a new pair with the current left value, and the 
+				// next right value.
 				NumberPair newPair = new NumberPair(String.valueOf(leftCurrent), String.valueOf(nextRight));
+				// if the current pairs right hand value is larger than the next pairs left hand value, 
+				// Example 1: 
+				// (5,10) and (7,12) <-- the value on the right of the first pair, 10, is greater than 
+				// the value on the left of the second pair, 7.  We make a new pair (5,12).
 				if (rightCurrent >= nextLeft) {
+					// Example 2:
+					// if the current and next pairs looked like (5,10) and (7,9), nextRight 7 would be less
+					// than rightCurrent 10, so the newPair would be (5,10).
 					if (nextRight < rightCurrent) {
 						newPair.setRight(String.valueOf(rightCurrent));
-					}
-					
+					}				
+					// the remove operation removes the position indicated and shifts everything up.
+					// From Example 1 above, (5,10 and 7,12), I remove the (5,10) and the (7,12) and replace it with
+					// the new pair (5,12).  With Example 2, I remove the (5,10) and the (7,9) and replace with (5,10).
 					finalList.remove(counter);
 					finalList.remove(counter);
 					finalList.add(newPair);
+					// The list needs to be resorted and the algo needs to run through the whole list without
+					// any rightCurrent >= nextLeft hits to exit this while block.
 					finalList = sortPairs(finalList);
 					mySortedList.clear();
 					mySortedList.addAll(finalList);
@@ -117,7 +153,9 @@ public class ZipcodeFactory implements ICruncher {
 				}
 				counter++;
 			}
-
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
 		return mySortedList;
 	}
 
