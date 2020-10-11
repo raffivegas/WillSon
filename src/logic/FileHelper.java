@@ -1,3 +1,4 @@
+package logic;
 import interfaces.IIOHelper;
 import utils.ConfigReader;
 import utils.NumberPair;

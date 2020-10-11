@@ -1,4 +1,5 @@
 package tests;
+import logic.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
@@ -19,10 +20,6 @@ class FindValidPairs_SpecialCharacters_ExceptionThrown {
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
-		List<NumberPair> mockList = new ArrayList<NumberPair>();
-		NumberPair mockPair = new NumberPair("43%34", "12313");		
-		mockList.add(mockPair);
-		IIOHelper myHelper = new FileHelper();
 	}
 
 	@BeforeEach
@@ -31,8 +28,18 @@ class FindValidPairs_SpecialCharacters_ExceptionThrown {
 
 	@Test
 	void test() {
-		IIOHelper myHelper = new FileHelper();
-		fail("Not yet implemented");
+		try {
+		// needs at least 2 pairs to sort.
+		List<NumberPair> mockList = new ArrayList<NumberPair>();
+		mockList.add(new NumberPair("43%34", "1213"));
+		mockList.add(new NumberPair("43034", "1213"));
+		//IIOHelper myHelper = new FileHelper();
+		ICruncher mockCruncher = new ZipcodeCruncher();
+		mockCruncher.sortPairs(mockList);
+		fail("Exception not thrown.");
+		}catch (NumberFormatException e) {
+			assertEquals(e, e);		
+		}
 	}
 
 }

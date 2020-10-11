@@ -1,3 +1,4 @@
+package logic;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -91,7 +92,7 @@ public class ZipcodeCruncher implements ICruncher {
 		} while (repeat);  // keep going while repeat is true.
 		
 		} catch (Exception e) {
-			e.printStackTrace();
+			throw e;//e.printStackTrace();
 		}
 		
 		return myList;
