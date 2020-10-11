@@ -132,11 +132,11 @@ public class ZipcodeCruncher implements ICruncher {
 				// Example 1: 
 				// (5,10) and (7,12) <-- the value on the right of the first pair, 10, is greater than 
 				// the value on the left of the second pair, 7.  We make a new pair (5,12).
-				if (rightCurrent >= nextLeft) {
+				if (rightCurrent >= nextLeft - 1) {
 					// Example 2:
 					// if the current and next pairs looked like (5,10) and (7,9), nextRight 7 would be less
 					// than rightCurrent 10, so the newPair would be (5,10).
-					if (nextRight < rightCurrent) {
+					if (nextRight <= rightCurrent) {
 						newPair.setRight(String.valueOf(rightCurrent));
 					}				
 					// the remove operation removes the position indicated and shifts everything up.
