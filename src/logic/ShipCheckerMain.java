@@ -22,6 +22,7 @@ public class ShipCheckerMain {
 		IIOHelper myFile = new FileHelper();
 		ICruncher myPairs = new ZipcodeCruncher();
 		
+		// static config class
 		ConfigReader.InitReader();
 		// parsePackage parses the input, sortPairs sorts the input, findFinalPairs gets the final list
 		// sendPackage outputs the results.
@@ -32,10 +33,10 @@ public class ShipCheckerMain {
 		// List<NumberPair> parsedList = new ArrayList<NumberPair>();
 		// List<NumberPair> sortedList = new ArrayList<NumberPair>();
 		// List<NumberPair> finalList = new ArrayList<NumberPair>();
-		// parsedList.addAll(myHelper.parsePackage());
-		// sortedList.addAll(myOutput.sortPairs(parsedList));
+		// parsedList.addAll(myFile.parsePackage());
+		// sortedList.addAll(myPairs.sortPairs(parsedList));
 		// finalList.addAll(sortedList);
-		// myHelper.sendPackage(finalList);
+		// myFile.sendPackage(finalList);
 		
 		// parsedList.clear();
 		// sortedList.clear();

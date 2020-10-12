@@ -1,11 +1,8 @@
 package logic;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import interfaces.ICruncher;
-import interfaces.IIOHelper;
 import utils.NumberPair;
 //TODO add an exception handler class to be able to do something meaningful with exceptions.
 

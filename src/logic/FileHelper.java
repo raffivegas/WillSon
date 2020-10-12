@@ -4,15 +4,11 @@ import utils.ConfigReader;
 import utils.NumberPair;
 
 import java.io.BufferedReader;
-import java.io.File; // Import the File class
 import java.io.FileInputStream;
-import java.io.FileNotFoundException; // Import this class to handle errors
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Properties;
-import java.util.Scanner; // Import the Scanner class to read text files
 
 import javax.swing.JOptionPane;
 //TODO add an exception handler formatter/logger class to be able to do something meaningful with exceptions.
