@@ -38,9 +38,8 @@ public class FileHelper implements IIOHelper {
 		// disclaimer - I copied a few lines of code (how to read a file/stream it in) off the net.
 		// I wrote the bracket and comma parsing algo myself.
 		try {
-			// TODO add config file with location.
+			// reads config file for input file location (tab delimited file containing [zipcode,pairs])
 			BufferedReader br = new BufferedReader(new InputStreamReader(
-					//new FileInputStream("C:\\Users\\Raffi\\Desktop\\ZipChecker\\zipcodes.txt"), "UTF8"));
 					new FileInputStream(ConfigReader.getMyProperties().getProperty("filePath")), "UTF8"));
 
 			String line = "";

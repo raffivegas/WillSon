@@ -7,7 +7,7 @@ import java.util.List;
 import interfaces.ICruncher;
 import interfaces.IIOHelper;
 import utils.NumberPair;
-//TODO add an exception handler class to be able to do something meaningfull with exceptions.
+//TODO add an exception handler class to be able to do something meaningful with exceptions.
 
 /**
  * @author Raffi
@@ -104,6 +104,7 @@ public class ZipcodeCruncher implements ICruncher {
 	 * This method returns the final set of zip-codes which can't be shipped to.
 	 * The final arrangement provides ranges which do not overlap and the minimum 
 	 * number of ranges required to represent the same restrictions as the input.
+	 * I ended up kludging this during unit testing since I've run out of time.
 	 */
 	public List<NumberPair> findFinalPairs(List<NumberPair> mySortedList) {
 
@@ -120,25 +121,30 @@ public class ZipcodeCruncher implements ICruncher {
 				finalList.addAll(mySortedList);
 				
 				// get the current and next left,right pairs.
-				int leftCurrent = Integer.parseInt(mySortedList.get(counter).getLeft());
+				// int leftCurrent = Integer.parseInt(mySortedList.get(counter).getLeft());
 				int rightCurrent = Integer.parseInt(mySortedList.get(counter).getRight());
 				int nextLeft = Integer.parseInt(mySortedList.get(counter + 1).getLeft());
 				int nextRight = Integer.parseInt(mySortedList.get(counter + 1).getRight());
+				
+				// Would have to pad if casting from int back to string values.  Using this as workaround.
+				String stringLeftCurrent = mySortedList.get(counter).getLeft();
+				String stringRightCurrent = mySortedList.get(counter).getRight();
+				// String stringNextLeft = mySortedList.get(counter + 1).getLeft();
+				String stringNextRight = mySortedList.get(counter + 1).getRight();
 
 				// doing this backwards.  Creates a new pair with the current left value, and the 
 				// next right value.
-				NumberPair newPair = new NumberPair(String.valueOf(leftCurrent), String.valueOf(nextRight));
-				// if the current pairs right hand value is larger than the next pairs left hand value, 
-				// Example 1: 
-				// (5,10) and (7,12) <-- the value on the right of the first pair, 10, is greater than 
-				// the value on the left of the second pair, 7.  We make a new pair (5,12).
-				if (rightCurrent >= nextLeft - 1) {
-					// Example 2:
-					// if the current and next pairs looked like (5,10) and (7,9), nextRight 7 would be less
-					// than rightCurrent 10, so the newPair would be (5,10).
-					if (nextRight <= rightCurrent) {
-						newPair.setRight(String.valueOf(rightCurrent));
-					}				
+				NumberPair newPair = new NumberPair(stringLeftCurrent, stringRightCurrent);
+				// the next if statement checks to see if the right value of the current pair
+				// is greater than, equal to, or one less than the right value of the next pair.
+				if (rightCurrent > nextLeft || (rightCurrent == nextLeft) || (rightCurrent + 1 == nextLeft)) {
+					// the next if statement checks to see if the right pair is nested within the left pair.
+					if (nextRight <= rightCurrent) { 
+						newPair.setRight(stringRightCurrent);
+					}
+					else {
+						newPair.setRight(stringNextRight);
+					}
 					// the remove operation removes the position indicated and shifts everything up.
 					// From Example 1 above, (5,10 and 7,12), I remove the (5,10) and the (7,12) and replace it with
 					// the new pair (5,12).  With Example 2, I remove the (5,10) and the (7,9) and replace with (5,10).
