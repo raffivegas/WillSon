@@ -150,7 +150,7 @@ public class FileHelper implements IIOHelper {
 		
 		// output the results to the user.  Will need to add JTextArea embedded in a JScrollPane if the messages
 		// get too long.
-		JOptionPane.showMessageDialog(null, myOutputString, "InfoBox: " + "testRaf", JOptionPane.INFORMATION_MESSAGE);
+		JOptionPane.showMessageDialog(null, myOutputString, "ZIP code validator", JOptionPane.INFORMATION_MESSAGE);
 		}catch (Exception e) {
 			// TODO implement a class which outputs a message to the user.
 			e.printStackTrace();
