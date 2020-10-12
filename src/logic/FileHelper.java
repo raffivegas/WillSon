@@ -105,6 +105,7 @@ public class FileHelper implements IIOHelper {
 			br.close();
 
 		} catch (IOException e) {
+			// TODO implement a class which outputs a message to the user.
 			e.printStackTrace();
 		}
 
@@ -151,6 +152,7 @@ public class FileHelper implements IIOHelper {
 		// get too long.
 		JOptionPane.showMessageDialog(null, myOutputString, "InfoBox: " + "testRaf", JOptionPane.INFORMATION_MESSAGE);
 		}catch (Exception e) {
+			// TODO implement a class which outputs a message to the user.
 			e.printStackTrace();
 		}
 	    	

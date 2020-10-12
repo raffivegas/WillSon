@@ -89,7 +89,8 @@ public class ZipcodeCruncher implements ICruncher {
 		} while (repeat);  // keep going while repeat is true.
 		
 		} catch (Exception e) {
-			throw e;//e.printStackTrace();
+			// TODO implement a class which outputs a message to the user.
+			e.printStackTrace();
 		}
 		
 		return myList;
@@ -158,6 +159,7 @@ public class ZipcodeCruncher implements ICruncher {
 				counter++;
 			}
 		}catch (Exception e) {
+			// TODO implement a class which outputs a message to the user.
 			e.printStackTrace();
 		}
 		return mySortedList;
