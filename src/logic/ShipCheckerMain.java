@@ -19,13 +19,13 @@ public class ShipCheckerMain {
 	 */
 	public static void main(String[] args) {
 
-		IIOHelper myHelper = new FileHelper();
-		ICruncher myOutput = new ZipcodeCruncher();
+		IIOHelper myFile = new FileHelper();
+		ICruncher myPairs = new ZipcodeCruncher();
 		
 		ConfigReader.InitReader();
 		// parsePackage parses the input, sortPairs sorts the input, findFinalPairs gets the final list
 		// sendPackage outputs the results.
-		myHelper.sendPackage(myOutput.findFinalPairs(myOutput.sortPairs(myHelper.parsePackage())));
+		myFile.sendPackage(myPairs.findFinalPairs(myPairs.sortPairs(myFile.parsePackage())));
 		
 		
 		// this may be easier to read if done this way:
