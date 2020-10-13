@@ -2,7 +2,7 @@ package logic;
 import java.util.ArrayList;
 import java.util.List;
 
-import interfaces.ICruncher;
+import interfaces.IPairHandler;
 import utils.StringPair;
 //TODO add an exception handler class to be able to do something meaningful with exceptions.
 
@@ -10,7 +10,7 @@ import utils.StringPair;
  * @author Raffi
  * Class which handles business logic.  In this case, manipulates pairs of zip-codes.
  */
-public class ZipcodeCruncher implements ICruncher <StringPair>{
+public class ZipcodeCruncher implements IPairHandler <StringPair>{
 	
 	public ZipcodeCruncher() {
 		
@@ -99,6 +99,7 @@ public class ZipcodeCruncher implements ICruncher <StringPair>{
 	
 	/**
 	 * @author Raffi
+	 * Should be given a sorted list of StringPairs as input.
 	 * This method returns the final set of zip-codes which can't be shipped to.
 	 * The final arrangement provides ranges which do not overlap and the minimum 
 	 * number of ranges required to represent the same restrictions as the input.

@@ -2,7 +2,7 @@ package interfaces;
 
 import java.util.List;
 
-public interface ICruncher <T>{
+public interface IPairHandler <T>{
 	
 	List<T> sortPairs(List<T> myList);
 	

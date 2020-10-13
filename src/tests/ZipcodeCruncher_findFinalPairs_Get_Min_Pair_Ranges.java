@@ -7,7 +7,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import interfaces.ICruncher;
+import interfaces.IPairHandler;
 import logic.ZipcodeCruncher;
 import utils.StringPair;
 
@@ -16,7 +16,7 @@ import utils.StringPair;
  * This tests the FindValidPairs function in the ZipcodeCruncher class.
  * 
  */
-class Should_Result_In_Min_Pair_Ranges_From_Sorted_List {
+class ZipcodeCruncher_findFinalPairs_Get_Min_Pair_Ranges {
 
 	@Test
 	void test() {
@@ -53,7 +53,7 @@ class Should_Result_In_Min_Pair_Ranges_From_Sorted_List {
 		
 		List<StringPair> placeHolderList = new ArrayList<StringPair>();
 		
-		ICruncher mockPairs = new ZipcodeCruncher();
+		IPairHandler<StringPair> mockPairs = new ZipcodeCruncher();
 		placeHolderList.addAll(mockPairs.findFinalPairs(mockPairs.sortPairs(mockInputList)));
 		mockInputList.clear();
 		mockInputList.addAll(placeHolderList);

@@ -1,7 +1,8 @@
 package logic;
-import interfaces.IIOHelper;
+import interfaces.IIOHandler;
 import utils.ConfigReader;
-import interfaces.ICruncher;
+import utils.StringPair;
+import interfaces.IPairHandler;
 
 /**
  * 
@@ -19,28 +20,17 @@ public class ShipCheckerMain {
 	 */
 	public static void main(String[] args) {
 
-		IIOHelper myFile = new FileHelper();
-		ICruncher myPairs = new ZipcodeCruncher();
+		IIOHandler<StringPair> myFile = new FileTools();
+		IPairHandler<StringPair> myPairs = new ZipcodeCruncher();
 		
 		// static config class
 		ConfigReader.InitReader();
-		// parsePackage parses the input, sortPairs sorts the input, findFinalPairs gets the final list
-		// sendPackage outputs the results.
+		
+		// if the validation passes, parsePackage parses the input, sortPairs sorts the input,
+		// findFinalPairs gets the final listsendPackage outputs the results.
+		if(myFile.validateInput()) {
 		myFile.sendPackage(myPairs.findFinalPairs(myPairs.sortPairs(myFile.parsePackage())));
-		
-		
-		// this may be easier to read if done this way:
-		// List<NumberPair> parsedList = new ArrayList<NumberPair>();
-		// List<NumberPair> sortedList = new ArrayList<NumberPair>();
-		// List<NumberPair> finalList = new ArrayList<NumberPair>();
-		// parsedList.addAll(myFile.parsePackage());
-		// sortedList.addAll(myPairs.sortPairs(parsedList));
-		// finalList.addAll(sortedList);
-		// myFile.sendPackage(finalList);
-		
-		// parsedList.clear();
-		// sortedList.clear();
-		// finalList.clear();
+		}		
 
 	}
 

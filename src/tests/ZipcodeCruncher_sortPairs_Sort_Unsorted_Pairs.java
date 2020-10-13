@@ -7,7 +7,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import interfaces.ICruncher;
+import interfaces.IPairHandler;
 import logic.ZipcodeCruncher;
 import utils.StringPair;
 
@@ -16,7 +16,7 @@ import utils.StringPair;
  * This tests the SortPairs function in the ZipcodeCruncher class.
  * Please note it only cares about the sort of the left hand column.
  */
-class Should_Sort_Unsorted_Pairs {
+class ZipcodeCruncher_sortPairs_Sort_Unsorted_Pairs {
 
 	@Test
 	void test() {
@@ -55,7 +55,7 @@ class Should_Sort_Unsorted_Pairs {
 		
 		List<StringPair> sortedList = new ArrayList<StringPair>();
 		
-		ICruncher mockOutput = new ZipcodeCruncher();
+		IPairHandler<StringPair> mockOutput = new ZipcodeCruncher();
 		sortedList.addAll(mockOutput.sortPairs(mockUnsortedList));
 
 		// I was having issues with the list equals function not returning true when the lists had identical values.

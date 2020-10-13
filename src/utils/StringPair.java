@@ -3,7 +3,6 @@ package utils;
 /**
  * @author Raffi
  * An object which holds a pair of strings.
- * The strings are cast to int elsewhere.
  */
 public class StringPair {
 
