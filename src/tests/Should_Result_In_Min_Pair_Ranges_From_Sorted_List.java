@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 
 import interfaces.ICruncher;
 import logic.ZipcodeCruncher;
-import utils.NumberPair;
+import utils.StringPair;
 
 /**
  * @author Raffi
@@ -23,35 +23,35 @@ class Should_Result_In_Min_Pair_Ranges_From_Sorted_List {
 		// test 1
 		// create mock input list which will be sorted later before running through 
 		// final valid pair algo.
-		List<NumberPair> mockInputList = new ArrayList<NumberPair>();
-		mockInputList.add(new NumberPair("00000", "10000"));
-		mockInputList.add(new NumberPair("01323", "19000"));
-		mockInputList.add(new NumberPair("01323", "09000"));
-		mockInputList.add(new NumberPair("18999", "21000"));
-		mockInputList.add(new NumberPair("21002", "21004"));
-		mockInputList.add(new NumberPair("01323", "09000"));
-		mockInputList.add(new NumberPair("21004", "21006"));
-		mockInputList.add(new NumberPair("21005", "21005"));
-		mockInputList.add(new NumberPair("21006", "21007"));
-		mockInputList.add(new NumberPair("21009", "21010"));
-		mockInputList.add(new NumberPair("01323", "09000"));
-		mockInputList.add(new NumberPair("99999", "99999"));
-		mockInputList.add(new NumberPair("90000", "99998"));
-		mockInputList.add(new NumberPair("01323", "09000"));
-		mockInputList.add(new NumberPair("40000", "40002"));
-		mockInputList.add(new NumberPair("39999", "40001"));
-		mockInputList.add(new NumberPair("01323", "19000"));
+		List<StringPair> mockInputList = new ArrayList<StringPair>();
+		mockInputList.add(new StringPair("00000", "10000"));
+		mockInputList.add(new StringPair("01323", "19000"));
+		mockInputList.add(new StringPair("01323", "09000"));
+		mockInputList.add(new StringPair("18999", "21000"));
+		mockInputList.add(new StringPair("21002", "21004"));
+		mockInputList.add(new StringPair("01323", "09000"));
+		mockInputList.add(new StringPair("21004", "21006"));
+		mockInputList.add(new StringPair("21005", "21005"));
+		mockInputList.add(new StringPair("21006", "21007"));
+		mockInputList.add(new StringPair("21009", "21010"));
+		mockInputList.add(new StringPair("01323", "09000"));
+		mockInputList.add(new StringPair("99999", "99999"));
+		mockInputList.add(new StringPair("90000", "99998"));
+		mockInputList.add(new StringPair("01323", "09000"));
+		mockInputList.add(new StringPair("40000", "40002"));
+		mockInputList.add(new StringPair("39999", "40001"));
+		mockInputList.add(new StringPair("01323", "19000"));
 		
 		// validate the sorted mockInputList against the expected mockFinalList.
 		// They should be equal.
-		List<NumberPair> mockFinalList = new ArrayList<NumberPair>();
-		mockFinalList.add(new NumberPair("00000", "21000"));
-		mockFinalList.add(new NumberPair("21002", "21007"));
-		mockFinalList.add(new NumberPair("21009", "21010"));
-		mockFinalList.add(new NumberPair("39999", "40002"));
-		mockFinalList.add(new NumberPair("90000", "99999"));
+		List<StringPair> mockFinalList = new ArrayList<StringPair>();
+		mockFinalList.add(new StringPair("00000", "21000"));
+		mockFinalList.add(new StringPair("21002", "21007"));
+		mockFinalList.add(new StringPair("21009", "21010"));
+		mockFinalList.add(new StringPair("39999", "40002"));
+		mockFinalList.add(new StringPair("90000", "99999"));
 		
-		List<NumberPair> placeHolderList = new ArrayList<NumberPair>();
+		List<StringPair> placeHolderList = new ArrayList<StringPair>();
 		
 		ICruncher mockPairs = new ZipcodeCruncher();
 		placeHolderList.addAll(mockPairs.findFinalPairs(mockPairs.sortPairs(mockInputList)));

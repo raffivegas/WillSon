@@ -1,7 +1,7 @@
 package logic;
 import interfaces.IIOHelper;
 import utils.ConfigReader;
-import utils.NumberPair;
+import utils.StringPair;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -17,7 +17,7 @@ import javax.swing.JOptionPane;
  * @author Raffi
  * Class to manipulate a file.
  */
-public class FileHelper implements IIOHelper {
+public class FileHelper implements IIOHelper <StringPair>{
 
 	/**
 	 * @author Raffi
@@ -27,9 +27,9 @@ public class FileHelper implements IIOHelper {
 	 * can likely be decoupled further by creating separate methods for capturing and parsing the input.
 	 */
 	@Override
-	public List<NumberPair> parsePackage() {
+	public List<StringPair> parsePackage() {
 
-		List<NumberPair> list = new ArrayList<NumberPair>();
+		List<StringPair> list = new ArrayList<StringPair>();
 
 		// disclaimer - I copied a few lines of code (how to read a file/stream it in) off the net.
 		// I wrote the bracket and comma parsing algo myself.
@@ -89,7 +89,7 @@ public class FileHelper implements IIOHelper {
 						} else {
 							// we've reached the end of a pair of numbers, add the number pair to our list.
 							// The List will hold duplicates.
-							list.add(new NumberPair(left, right));
+							list.add(new StringPair(left, right));
 							// reset flags and vars, rinse and repeat.
 							grabLeft = false;
 							grabRight = false;
@@ -136,14 +136,14 @@ public class FileHelper implements IIOHelper {
 	 * it might handle formatting or serializing of the package to send to an endpoint.
 	 */
 	@Override
-	public void sendPackage(List<NumberPair> finalList) {
+	public void sendPackage(List<StringPair> finalList) {
 		
 		String myOutputString = "Can't ship to Zipcodes within the following ranges:\n";
 		
 		try {
 		System.out.println("Can't ship to Zipcodes within the following ranges:");
 		// add final sorted pairs to the string
-		for (NumberPair raf : finalList) {
+		for (StringPair raf : finalList) {
 			System.out.println(raf.getLeft() + ", " + raf.getRight());
 			myOutputString += raf.getLeft() + ", " + raf.getRight() + "\n";
 		}

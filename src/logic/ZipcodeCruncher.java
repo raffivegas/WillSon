@@ -3,14 +3,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import interfaces.ICruncher;
-import utils.NumberPair;
+import utils.StringPair;
 //TODO add an exception handler class to be able to do something meaningful with exceptions.
 
 /**
  * @author Raffi
  * Class which handles business logic.  In this case, manipulates pairs of zip-codes.
  */
-public class ZipcodeCruncher implements ICruncher {
+public class ZipcodeCruncher implements ICruncher <StringPair>{
 	
 	public ZipcodeCruncher() {
 		
@@ -32,9 +32,9 @@ public class ZipcodeCruncher implements ICruncher {
 	 * 0	0	0	0	7	7	7	7	7	7	7	7
 	 */
 	@Override
-	public List<NumberPair> sortPairs(List<NumberPair> myList) {
+	public List<StringPair> sortPairs(List<StringPair> myList) {
 
-		List<NumberPair> sortedList = new ArrayList<NumberPair>();
+		List<StringPair> sortedList = new ArrayList<StringPair>();
 		
 		int counter = 0;
 		int maxCounter = 0;
@@ -54,8 +54,8 @@ public class ZipcodeCruncher implements ICruncher {
 				// initialize or re-init the new partially sorted list and the space in it.
 				sortedList.addAll(myList);
 				// gets the current and next pairs from the source list.
-				NumberPair currentPair = myList.get(counter);
-				NumberPair nextPair = myList.get(counter + 1);
+				StringPair currentPair = myList.get(counter);
+				StringPair nextPair = myList.get(counter + 1);
 				// sets (overwrites) the pair in the next position with the current pair.
 				sortedList.set(counter + 1, currentPair);
 				// sets (overwrites) the current pair with the next pair, swapping positions with the pairs. 
@@ -104,11 +104,11 @@ public class ZipcodeCruncher implements ICruncher {
 	 * number of ranges required to represent the same restrictions as the input.
 	 * I ended up kludging this during unit testing since I've run out of time.
 	 */
-	public List<NumberPair> findFinalPairs(List<NumberPair> mySortedList) {
+	public List<StringPair> findFinalPairs(List<StringPair> mySortedList) {
 
 		// placeholder for final sorted list which will have the minimum
 		// number of pairs to show which zip-codes can't be shipped to.
-		List<NumberPair> finalList = new ArrayList<NumberPair>();
+		List<StringPair> finalList = new ArrayList<StringPair>();
 
 		int counter = 0;
 
@@ -132,7 +132,7 @@ public class ZipcodeCruncher implements ICruncher {
 
 				// doing this backwards.  Creates a new pair with the current left value, and the 
 				// next right value.
-				NumberPair newPair = new NumberPair(stringLeftCurrent, stringRightCurrent);
+				StringPair newPair = new StringPair(stringLeftCurrent, stringRightCurrent);
 				// the next if statement checks to see if the right value of the current pair
 				// is greater than, equal to, or one less than the right value of the next pair.
 				if (rightCurrent > nextLeft || (rightCurrent == nextLeft) || (rightCurrent + 1 == nextLeft)) {

@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 
 import interfaces.ICruncher;
 import logic.ZipcodeCruncher;
-import utils.NumberPair;
+import utils.StringPair;
 
 /**
  * @author Raffi
@@ -21,39 +21,39 @@ class Should_Sort_Unsorted_Pairs {
 	@Test
 	void test() {
 		// create mock unsorted list.
-		List<NumberPair> mockUnsortedList = new ArrayList<NumberPair>();
-		mockUnsortedList.add(new NumberPair("01323", "19000"));
-		mockUnsortedList.add(new NumberPair("01323", "09000"));
-		mockUnsortedList.add(new NumberPair("99999", "99999"));
-		mockUnsortedList.add(new NumberPair("18999", "21000"));
-		mockUnsortedList.add(new NumberPair("21002", "21004"));
-		mockUnsortedList.add(new NumberPair("00000", "10000"));	
-		mockUnsortedList.add(new NumberPair("21005", "21005"));
-		mockUnsortedList.add(new NumberPair("21006", "21007"));	
-		mockUnsortedList.add(new NumberPair("90000", "99998"));
-		mockUnsortedList.add(new NumberPair("21004", "21006"));
-		mockUnsortedList.add(new NumberPair("40000", "40002"));
-		mockUnsortedList.add(new NumberPair("39999", "40001"));
-		mockUnsortedList.add(new NumberPair("21009", "21010"));
+		List<StringPair> mockUnsortedList = new ArrayList<StringPair>();
+		mockUnsortedList.add(new StringPair("01323", "19000"));
+		mockUnsortedList.add(new StringPair("01323", "09000"));
+		mockUnsortedList.add(new StringPair("99999", "99999"));
+		mockUnsortedList.add(new StringPair("18999", "21000"));
+		mockUnsortedList.add(new StringPair("21002", "21004"));
+		mockUnsortedList.add(new StringPair("00000", "10000"));	
+		mockUnsortedList.add(new StringPair("21005", "21005"));
+		mockUnsortedList.add(new StringPair("21006", "21007"));	
+		mockUnsortedList.add(new StringPair("90000", "99998"));
+		mockUnsortedList.add(new StringPair("21004", "21006"));
+		mockUnsortedList.add(new StringPair("40000", "40002"));
+		mockUnsortedList.add(new StringPair("39999", "40001"));
+		mockUnsortedList.add(new StringPair("21009", "21010"));
 		
 		// validate the sorted mockUnsortedList against the sorted list.
 		// They should be equal.
-		List<NumberPair> mockSortedList = new ArrayList<NumberPair>();
-		mockSortedList.add(new NumberPair("00000", "10000"));
-		mockSortedList.add(new NumberPair("01323", "09000"));
-		mockSortedList.add(new NumberPair("01323", "19000"));
-		mockSortedList.add(new NumberPair("18999", "21000"));
-		mockSortedList.add(new NumberPair("21002", "21004"));
-		mockSortedList.add(new NumberPair("21004", "21006"));
-		mockSortedList.add(new NumberPair("21005", "21005"));
-		mockSortedList.add(new NumberPair("21006", "21007"));
-		mockSortedList.add(new NumberPair("21009", "21010"));
-		mockSortedList.add(new NumberPair("39999", "40001"));
-		mockSortedList.add(new NumberPair("40000", "40002"));
-		mockSortedList.add(new NumberPair("90000", "99998"));
-		mockSortedList.add(new NumberPair("99999", "99999"));
+		List<StringPair> mockSortedList = new ArrayList<StringPair>();
+		mockSortedList.add(new StringPair("00000", "10000"));
+		mockSortedList.add(new StringPair("01323", "09000"));
+		mockSortedList.add(new StringPair("01323", "19000"));
+		mockSortedList.add(new StringPair("18999", "21000"));
+		mockSortedList.add(new StringPair("21002", "21004"));
+		mockSortedList.add(new StringPair("21004", "21006"));
+		mockSortedList.add(new StringPair("21005", "21005"));
+		mockSortedList.add(new StringPair("21006", "21007"));
+		mockSortedList.add(new StringPair("21009", "21010"));
+		mockSortedList.add(new StringPair("39999", "40001"));
+		mockSortedList.add(new StringPair("40000", "40002"));
+		mockSortedList.add(new StringPair("90000", "99998"));
+		mockSortedList.add(new StringPair("99999", "99999"));
 		
-		List<NumberPair> sortedList = new ArrayList<NumberPair>();
+		List<StringPair> sortedList = new ArrayList<StringPair>();
 		
 		ICruncher mockOutput = new ZipcodeCruncher();
 		sortedList.addAll(mockOutput.sortPairs(mockUnsortedList));

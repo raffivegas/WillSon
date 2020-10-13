@@ -2,12 +2,10 @@ package interfaces;
 
 import java.util.List;
 
-import utils.NumberPair;
-
-public interface ICruncher {
+public interface ICruncher <T>{
 	
-	List<NumberPair> sortPairs(List<NumberPair> myList);
+	List<T> sortPairs(List<T> myList);
 	
-	List<NumberPair> findFinalPairs(List<NumberPair> mySortedList);
+	List<T> findFinalPairs(List<T> mySortedList);
 
 }

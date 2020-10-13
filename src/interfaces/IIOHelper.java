@@ -2,14 +2,12 @@ package interfaces;
 
 import java.util.List;
 
-import utils.NumberPair;
-
-public interface IIOHelper {
+public interface IIOHelper <T>{
 	
-	List<NumberPair> parsePackage();
+	List<T> parsePackage();
 	
 	void validateInput();
 
-	void sendPackage(List<NumberPair> finalList);
+	void sendPackage(List<T> finalList);
 	
 }
